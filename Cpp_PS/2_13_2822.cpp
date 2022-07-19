@@ -1,12 +1,24 @@
 #include <stdio.h>
-#include <map>
+#include <vector>
+#include <algorithm>
 using namespace std;
+bool compare(pair<int, int> a, pair<int, int> b) {
+	if (a.second == b.second) return a.first < b.first;
+	else return a.second < b.second;
+}
 int main() {
-	int in, tot=0;
-	map<int, int> num;
-	for (int i = 0; i < 8; i++) {
+	int i, in, tot=0;
+	vector<pair<int, int>> points;
+	for (i = 0; i < 8; i++) {
 		scanf_s("%d", &in);
-		num[in] = i + 1;
+		points.push_back(make_pair(in, i + 1));
 	}
-	for (int i = 7; i > 2; i++) { printf("%d \t", num.at(i)); }
+	sort(points.begin(), points.end());
+	for (i = 0; i < 8; i++) {
+		if (i < 3) points.erase(points.begin());
+		else tot += points[i - 3].first;
+	}
+	sort(points.begin(), points.end(), compare);
+	printf("%d\n", tot);
+	for (i = 0; i < 5; i++) printf("%d ", points[i].second);
 }
