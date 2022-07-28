@@ -1,14 +1,14 @@
 #include <stdio.h>
 int main() {
-	int k, p, m, i, in;
+	int k, p, m, i, in, ans=0;
 	scanf_s("%d", &k);
 	while (k--) {
 		scanf_s("%d %d", &p, &m);
-		int arr[500] = {0};
-		for (i = 0; i < p; i++, arr[in]++)
+		int arr[501] = {0};
+		for (i = 0, ans=0; i < p; i++, arr[in]++) {
 			scanf_s("%d", &in);
-		for (i = 1, in = 0; i <= m; i++)
-			if (arr[i] != 1 && arr[i] != 0) in += (arr[i]-1); 
-		printf("%d\n", in);
+			if (arr[in] != 0) ans++;
+		}
+		printf("%d\n", ans);
 	}
 }
