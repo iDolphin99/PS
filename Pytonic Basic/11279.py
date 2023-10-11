@@ -4,8 +4,11 @@
 '''
 from sys import stdin, stdout
 import heapq
-heapq = []
+heap = []
 input = stdin.readline
+print = stdout.write
 for i in range(int(input())):
-    n = int(input())
-    print('시발왜않되') if n == 0 else print('시발돼')
+    n = int(input()) * -1
+    if n==0 :
+        print("0 \n") if len(heap) == 0 else print(str(heapq.heappop(heap) * -1) + '\n')
+    else: heapq.heappush(heap, n) 
