@@ -8,23 +8,37 @@ M x N의 집터에서 제거(2초), 쌓기(1초)작업을 통해 빠른 시간 �
 from sys import stdin 
 input = stdin.readline
 N, M, B = map(int, input().rsplit())
-arr = []
+grounds = []
 for i in range(N):
-    arr += list(map(int, input().rsplit()))
-arr = sorted(arr)
-maxH, minH, answers = max(arr), min(arr), []
-    
-for h in range(maxH, minH-1, -1):
-    cnt, b = 0, B
-    for e in arr: # 65 64 63 62 61 60
-        if e > h: # 제거하기
-            cnt += (e-h)*2
-            b += (e-h)
-        cnt += (h-e) # 쌓기 
-        b -= (h-e)
-        
-        
-    if b >= 0:
-        answers.append((cnt, h))
+    grounds += list(map(int, input().rsplit()))
+maxH, minH, answer, glevel = max(grounds), min(grounds), int(1e9), 0
 
-print(*min(answers))
+for h in range(maxH, minH-1, -1):
+    take, use = 0, 0
+    for g in grounds: 
+        if g > h: take += g-h # 제거
+        else:     use += h-g  # 쌓기
+    if use > take + B:
+        continue
+    
+    count = take * 2 + use
+    if count < answer:
+        answer = count 
+        glevel = h
+
+print(answer, glevel)
+            
+
+''' Failed Code '''
+# for h in range(maxH, minH-1, -1):
+#     cnt, b = 0, B
+#     for g in grounds: # 65 64 63 62 61 60
+#         if g > h: # 제거하기
+#             cnt += (g-h)*2
+#             b += (g-h)
+#         else:     # 쌓기
+#             cnt += (h-g) 
+#             b -= (h-g)
+#     if b >= 0:
+#         answers.append((cnt, h))
+# print(*min(answers))
