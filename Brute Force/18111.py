@@ -32,13 +32,14 @@ print(answer, glevel)
 ''' Failed Code '''
 # for h in range(maxH, minH-1, -1):
 #     cnt, b = 0, B
-#     for g in grounds: # 65 64 63 62 61 60
-#         if g > h: # 제거하기
-#             cnt += (g-h)*2
-#             b += (g-h)
-#         else:     # 쌓기
-#             cnt += (h-g) 
+#     for g in grounds:
+#         if g < h:  # 쌓기  
+#             cnt += (h-g)
 #             b -= (h-g)
-#     if b >= 0:
-#         answers.append((cnt, h))
-# print(*min(answers))
+#         else: # 제거하기
+#             cnt += (g-h)*2
+#             b += (g-h)  
+#     if b < 0 : continue
+#     if cnt < answer: 
+#         answer = cnt 
+#         glevel = h
