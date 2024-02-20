@@ -6,7 +6,7 @@ from sys import stdin
 from collections import deque 
 input = stdin.readline
 
-def dfs():
+def bfs():
     worm = 0
     while graph:
         deq = deque([graph.pop(0)])
@@ -14,7 +14,7 @@ def dfs():
             x, y = deq.popleft()
             directions = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
             for d in directions:
-                if d in graph: 
+                if d in graph: # 2,500 x 4 = 10,000
                     graph.remove(d)
                     deq.append(d)
         worm = worm + 1
@@ -26,7 +26,7 @@ for _ in range(int(input())):
     for i in range(K):
         x, y = map(int, input().split())
         graph.append((x,y)) 
-    dfs()
+    bfs()
 
 
 
