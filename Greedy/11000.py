@@ -6,9 +6,9 @@
 from sys import stdin 
 import heapq
 input = stdin.readline
+times = sorted([list(map(int, input().rsplit())) for _ in range(int(input()))])
 start, end = [], []
-for _ in range(int(input())):
-    st, en = map(int, input().rsplit())
+for st, en in times:
     if len(end) == 0:
         heapq.heappush(end, en)
         heapq.heappush(start, st)
@@ -24,18 +24,3 @@ for _ in range(int(input())):
             heapq.heappush(end, en)
 print(len(start))
 
-'''
-start, end = [], []
-for _ in range(int(input())):
-    st, en = map(int, input().rsplit())
-    if len(end) == 0:
-        heapq.heappush(start, st)
-        heapq.heappush(end, en)
-    else:
-        for i in range(len(end)):
-            if end[i][0] >= en:
-                heapq.heappushpop(start[i], st)
-                heapq.heappushpop(end[i], en)
-
-
-'''
