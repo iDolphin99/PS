@@ -8,8 +8,9 @@ from sys import stdin
 
 def solution():
     N = int(stdin.readline())
-    dp = [[1 for _ in range(9)] for __ in range(N+1)]
-    print(dp)
+    dp = [[1 for _ in range(10)] for __ in range(N+1)]
+    dp[1][0] = 0
+    mod = 1000000000
     
     ans = 9
     for i in range(2, N+1):
@@ -20,11 +21,8 @@ def solution():
                 dp[i][j]=dp[i-1][8]
             else:
                 dp[i][j]=dp[i-1][j-1]+dp[i-1][j+1]
-        ans = sum(dp[i])
-    
-    print("changed: ")
-    print(dp)
-    
+        ans = sum(dp[i])%mod
+
     return ans
 
 if __name__ == "__main__":
