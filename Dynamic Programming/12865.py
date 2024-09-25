@@ -6,6 +6,11 @@
 
 from sys import stdin 
 
+def printdp(dptable):
+    for i in range(len(dptable)):
+        print(dptable[i])
+    print()
+
 def solution():
     input = stdin.readline
     N, K = map(int, input().rsplit())
@@ -17,9 +22,9 @@ def solution():
         for j in range(1, K+1):
             if j >= wi:
                 dp[j][i] = max(dp[j][i-1], dp[j-wi][i-1]+vi)
+                printdp(dp)
             else:
                 dp[j][i] = dp[j][i-1]
-        print(dp)
     
     return dp[K][N] 
 
