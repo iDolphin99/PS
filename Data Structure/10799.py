@@ -7,8 +7,21 @@
 from sys import stdin
 
 def solution():
+    iron = stdin.readline().rstrip()
     
-    return 0
+    stack = []
+    answer = 0
+    for i, peice in enumerate(iron):
+        if peice=="(":
+            stack.append(i)
+        else:
+            if iron[i-1] == "(": 
+                answer += len(stack)-1
+            else:    
+                answer += 1
+            stack.pop()
+    
+    return answer
 
 if __name__ == "__main__":
     print(solution())
