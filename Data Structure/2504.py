@@ -12,28 +12,25 @@ def solution():
     string = stdin.readline().rstrip()
     
     dic = {")": "(", "]": "["}
-    num = 1
-    isOpen = False
-    stack = []
+    wasOpen = False
+    stack = [["{", 1]]
     answer = 0
     for s in string:
+        last = stack[-1][1]
         if s in dic.values(): # open
-            if s == "(": num *= 2 
-            else: num *= 3 
-            stack.append([s, num])
-            isOpen = True
-        elif s in dic.keys(): # close
-            if len(stack)==0 or stack[-1][0] != dic.get(s): 
-                break 
-            last = stack.pop()
-            if isOpen:
-                answer += last[1]
-            num = stack[-1][1]
-            isOpen = False
-        print(stack, answer)
+            if s == "(": last *= 2 
+            else: last *= 3 
+            stack.append([s, last])
+            wasOpen = True
+        elif s in dic.keys(): # close   
+            if stack[-1][0]=="{" or stack[-1][0] != dic.get(s): 
+                return 0
+            if wasOpen:
+                answer += last
+            stack.pop()
+            wasOpen = False    
             
-            
-    return answer
+    return answer if len(stack)==1 else 0
 
 if __name__ == "__main__":
     print(solution())
